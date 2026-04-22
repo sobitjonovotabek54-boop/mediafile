@@ -1,0 +1,13 @@
+{% extends "app/base.html" %}
+{% block content %}
+{% include "navbar.html" %}
+    {% for bot in botlar %}
+        <h1>{{bot.ism}} {{bot.familiya}}</h1>
+        {% if bot.yosh > 14 %}
+            <p>Siz qarib qolibsiz</p>
+            {% else %}
+            <p>Siz detskiy ekansiz</p>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+       

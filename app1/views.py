@@ -3,11 +3,10 @@ from . import models
 
 # Create your views here.
 
-def rendering(request):
-    # users=[
-    #     {'ism':'Azizbek','familiya':'Abdurahimov','yosh':15},
-    #     {'ism':'Shaxzod','familiya':'Zuparov','yosh':16},
-    #     {'ism':'Doston','familiya':'Mirakilov','yosh':12}
-    # ]
-    users= models.User.objects.all()
-    return render(request,'app/index.html',context={"botlar":users})    
+def user_list(request):
+    botlar=models.User.objects.all()
+    return render(request, 'app/index.html', {'botlar': botlar})
+
+def user_view(request, slug):
+    botlar=models.User.objects.get(slag=slug)
+    return render(request, 'app/user_view.html', {'botlar': botlar})

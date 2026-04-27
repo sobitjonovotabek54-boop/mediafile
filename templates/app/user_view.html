@@ -1,0 +1,13 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <h1>{{ botlar.ism }} {{ botlar.familiya }}</h1>
+    <p>Yosh: {{ botlar.yosh }}</p>
+    
+  <!-- <p>{{botlar.picture}}</p> -->
+        <img src="{{ botlar.picture.url }}" width="200" alt="User rasmi">
+
+
+    <br>
+    <a href="{% url 'user_list' %}">Orqaga qaytish</a>
+{% endblock %}

@@ -3,11 +3,16 @@
 {% block content %}
     <h1>{{ botlar.ism }} {{ botlar.familiya }}</h1>
     <p>Yosh: {{ botlar.yosh }}</p>
-    
-  <!-- <p>{{botlar.picture}}</p> -->
-        <img src="{{ botlar.picture.url }}" width="200" alt="User rasmi">
 
+    {% if botlar.picture %}
+        <img src="{{ botlar.picture.url }}" width="200" alt="User rasmi">
+    {% else %}
+        <p>Rasm mavjud emas</p>
+    {% endif %}
 
     <br>
     <a href="{% url 'user_list' %}">Orqaga qaytish</a>
+    <a href="{% url 'user_update' botlar.slug %}">Foydalanuvchi malumotlarini tahrirlash</a>
+    <a href="{% url 'user_delete' botlar.slug %}">Foydalanuvchi malumotlarini o'chirish</a>
+    
 {% endblock %}

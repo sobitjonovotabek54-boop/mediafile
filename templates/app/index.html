@@ -1,7 +1,56 @@
-{% extends "app/base.html" %}
-{% block content %}
-{% include "app/navbar.html" %}
-    {% for bot in botlar %}
-        <a href="{% url 'user_view' bot.slag %}"><h1>{{bot.ism}} {{bot.familiya}}</h1></a>
-    {% endfor %}
-{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<div class="container py-4">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">🎓 Students Dashboard</h2>
+        <a href="{% url 'user_create' %}" class="btn btn-primary shadow">+ Add Student</a>
+    </div>
+
+    <!-- CARDS -->
+    <div class="row g-4">
+        {% for bot in botlar %}
+        <div class="col-md-4">
+            <div class="card custom-card h-100">
+
+                <img src="{{ bot.picture.url }}" class="card-img-top">
+
+                <div class="card-body text-center">
+                    <h5 class="card-title">
+                        {{ bot.name }} {{ bot.sure_name }}
+                    </h5>
+
+                    <p class="text-muted mb-1">Photo: {{ bot.age }}</p>
+                </div>
+
+                <div class="card-footer text-center bg-white border-0">
+                    <a href="{% url 'user_view' bot.slug %}" class="btn btn-sm btn-success">View</a>
+                    <a href="{% url 'user_update' bot.slug %}" class="btn btn-sm btn-warning">Edit</a>
+                              
+                </div>
+
+            </div>
+        </div>
+        {% empty %}
+            <h4>No students yet 😢</h4>
+        {% endfor %}
+    </div>
+
+</div>
+
+</body>
+</html>

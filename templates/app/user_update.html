@@ -1,0 +1,59 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+<div style="max-width: 400px; margin: auto;">
+    <h2>Profilni yangilash</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Ism -->
+        <div style="margin-bottom: 10px;">
+            <label>Ism:</label><br>
+            <input type="text" name="name" 
+                   value="{{ user.ism|default:'' }}" 
+                   placeholder="Ismingizni kiriting"
+                   style="width: 100%; padding: 5px;">
+        </div>
+
+        <!-- Familiya -->
+        <div style="margin-bottom: 10px;">
+            <label>Familiya:</label><br>
+            <input type="text" name="surename" 
+                   value="{{ user.familiya|default:'' }}" 
+                   placeholder="Familiyangizni kiriting"
+                   style="width: 100%; padding: 5px;">
+        </div>
+
+        <!-- Yosh -->
+        <div style="margin-bottom: 10px;">
+            <label>Yosh:</label><br>
+            <input type="number" name="age" 
+                   value="{{ user.yosh|default:'' }}" 
+                   placeholder="Yoshingiz"
+                   style="width: 100%; padding: 5px;">
+        </div>
+
+        <!-- Rasm -->
+        <div style="margin-bottom: 10px;">
+            <label>Profil rasmi:</label><br>
+
+            {% if user.picture %}
+                <img src="{{ user.picture.url }}" width="150" 
+                     style="display:block; margin-bottom:10px;" 
+                     alt="User rasmi">
+            {% else %}
+                <p>Hozircha rasm yo'q</p>
+            {% endif %}
+
+            <input type="file" name="picture">
+        </div>
+
+        <!-- Tugma -->
+        <button type="submit" 
+                style="padding: 8px 15px; cursor: pointer;">
+            Update
+        </button>
+    </form>
+</div>
+{% endblock %}
